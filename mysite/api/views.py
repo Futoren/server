@@ -10,8 +10,8 @@ from rest_framework import viewsets
 
 #作成したモデルとシリアライザをインポート
 from django.contrib.auth.models import User
-from .models import Todo
-from .serializers import UserSerializer,TodoSerializer
+from .models import Senser, Senser2
+from .serializers import UserSerializer,SenserSerializer,Senser2Serializer
 
 #作成したpermissionをインポート
 from .ownpermissions import OwnPermission
@@ -40,8 +40,14 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         return self.request.user
 
-class TodoViewSet(viewsets.ModelViewSet):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
+class SenserViewSet(viewsets.ModelViewSet):
+    queryset = Senser.objects.all()
+    serializer_class = SenserSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+class Senser2ViewSet(viewsets.ModelViewSet):
+    queryset = Senser2.objects.all()
+    serializer_class = Senser2Serializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)

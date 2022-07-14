@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Todo
+from .models import Senser, Senser2
 #djangoのデフォルトで用意されているUserモデルをインポート
 from django.contrib.auth.models import User
 #ユーザ用のトークンをインポート
@@ -21,12 +21,22 @@ class UserSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
         return user
 
-class TodoSerializer(serializers.ModelSerializer):
+class SenserSerializer(serializers.ModelSerializer):
 
     #djangoのDatetimefieldの表記を変更
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
 
     class Meta:
-        model = Todo
-        fields = ['id','title','content','created_at','updated_at']
+        model = Senser
+        fields = ['id','x','y','z','created_at','updated_at']
+
+class Senser2Serializer(serializers.ModelSerializer):
+
+    #djangoのDatetimefieldの表記を変更
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
+
+    class Meta:
+        model = Senser2
+        fields = ['id','value','created_at','updated_at']
