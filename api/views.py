@@ -1,53 +1,49 @@
 from django.shortcuts import render
 
-#トークン認証に必要なライブラリ
+# トークン認証に必要なライブラリ
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-#ビュー作成に必要なライブラリ
+# ビュー作成に必要なライブラリ
 from rest_framework import generics
 from rest_framework import viewsets
 
-#作成したモデルとシリアライザをインポート
+# 作成したモデルとシリアライザをインポート
 from django.contrib.auth.models import User
-from .models import Senser, Senser2
-from .serializers import UserSerializer,SenserSerializer,Senser2Serializer
+from .models import Senser
+from .serializers import UserSerializer, SenserSerializer
 
-#作成したpermissionをインポート
+# 作成したpermissionをインポート
 from .ownpermissions import OwnPermission
 
-class UserViewSet(viewsets.ModelViewSet):
 
-    #ユーザオブジェクトを全て取得する
+class UserViewSet(viewsets.ModelViewSet):
+    # ユーザオブジェクトを全て取得する
     queryset = User.objects.all()
 
-    #使用するシリアライザを指定する
+    # 使用するシリアライザを指定する
     serializer_class = UserSerializer
 
-    #誰でも見れるように指定する
+    # 誰でも見れるように指定する
     permission_classes = (OwnPermission,)
+
 
 class ManageUserView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
 
-    #認証が通ったユーザのみアクセスできるように指定する
+    # 認証が通ったユーザのみアクセスできるように指定する
     authentication_classes = (TokenAuthentication,)
 
-    #ログインしているユーザのみ許可するように指定する
+    # ログインしているユーザのみ許可するように指定する
     permission_classes = (IsAuthenticated,)
 
-    #ログインしているユーザ情報を返す関数
+    # ログインしているユーザ情報を返す関数
     def get_object(self):
         return self.request.user
+
 
 class SenserViewSet(viewsets.ModelViewSet):
     queryset = Senser.objects.all()
     serializer_class = SenserSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-
-class Senser2ViewSet(viewsets.ModelViewSet):
-    queryset = Senser2.objects.all()
-    serializer_class = Senser2Serializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
