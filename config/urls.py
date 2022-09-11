@@ -21,8 +21,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
-    #apiのurlsを見にいく
-    path('api/',include('api.urls')),
-    #ユーザ名とパスワードをPOSTするとトークンを返す。
-    path('auth/',obtain_auth_token ),
+    path('api/', include('api.urls')),
+    path('auth/', obtain_auth_token),
 ]

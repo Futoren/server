@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
-    'api',
+    'sensor',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
