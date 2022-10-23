@@ -5,9 +5,9 @@ class Sensor(models.Model):
     Action = models.CharField(max_length=400)
     DeviceName = models.CharField(max_length=400)
     SensorName = models.CharField(max_length=400)
-    x = models.FloatField(max_length=400)
-    y = models.FloatField(max_length=400)
-    z = models.FloatField(max_length=400)
+    X = models.FloatField(max_length=400)
+    Y = models.FloatField(max_length=400)
+    Z = models.FloatField(max_length=400)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
